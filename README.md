@@ -1,3 +1,36 @@
+# Solytics
+
+Some basic analytics for Solana. Pulls in live data from on chain.
+
+- Recent transactions per second
+- Market caps for certain SPL tokens
+- Some wallet balances
+
+Tech stack:
+
+- [Turborepo](https://turbo.build/repo/docs): monorepo manager, makes it easier to manage multiple projects and code sharing
+  - It shows a separate UI package, but it was taken out for now as it wasn't clear how to manually set up shadcn/ui with it
+- [NestJS](https://docs.nestjs.com/): opinionated Node.js Typescript framework that encourages good practices
+- [Solana Web3.js](https://solana.com/docs/clients/javascript): Solana blockchain javascript RPC client
+- [React](https://reactjs.org/): UI framework
+- [Vite](https://vitejs.dev): frontend build tool
+- [Tailwind](https://tailwindcss.com/): atomic CSS for the win
+- [Shadcn/ui](https://github.com/Shadcn/ui): clean, based on headless primitives from Radix, imports the code- it's not a component library so have full control
+
+### TODO
+
+- [ ] Frontend tests
+- [ ] Backend tests
+- [ ] Dockerize backend
+- [ ] Redis instead of in NestJs default in memory cache
+
+## Starting the project
+
+```bash
+pnpm install
+pnpm dev
+```
+
 # Turborepo starter
 
 This is an official starter Turborepo.
@@ -19,7 +52,7 @@ This Turborepo includes the following packages/apps:
     .
     ├── apps
     │   ├── api                       # NestJS app (https://nestjs.com).
-    │   └── web                       # Next.js app (https://nextjs.org).
+    │   └── web                       # ViteJS app (https://vitejs.dev).
     └── packages
         ├── @repo/api                 # Shared `NestJS` resources.
         ├── @repo/eslint-config       # `eslint` configurations (includes `prettier`)

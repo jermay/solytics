@@ -9,4 +9,19 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('tps')
+  getTps() {
+    return this.appService.getTps();
+  }
+
+  @Get('market-cap')
+  getMarketCap() {
+    return this.appService.getMarketCap();
+  }
+
+  @Get('wallets')
+  getWallets() {
+    return this.appService.getWallets();
+  }
 }
