@@ -16,10 +16,13 @@ Tech stack:
 - [Vite](https://vitejs.dev): frontend build tool
 - [Tailwind](https://tailwindcss.com/): atomic CSS for the win
 - [Shadcn/ui](https://github.com/Shadcn/ui): clean, based on headless primitives from Radix, imports the code- it's not a component library so have full control
+- [Tanstack React Query](https://tanstack.com/query/latest): data fetching and caching in the browser, query state management
+- [React Testing Library](https://testing-library.com/docs/): frontend testing utilities
+- [Jest](https://jestjs.io/): JavaScript testing framework
 
 ### TODO
 
-- [ ] Frontend tests
+- [x] Frontend tests
 - [ ] Backend tests
 - [ ] Dockerize backend
 - [ ] Redis instead of in NestJs default in memory cache
@@ -29,6 +32,12 @@ Tech stack:
 ```bash
 pnpm install
 pnpm dev
+```
+
+## Testing
+
+```bash
+pnpm test
 ```
 
 # Turborepo starter
