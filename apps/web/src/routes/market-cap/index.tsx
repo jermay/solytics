@@ -58,71 +58,73 @@ export default function MarketCap() {
       ),
   });
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <section>
       <h2 className="text-center text-3xl font-bold">
         Selected SPL Token Market Cap
       </h2>
       <p className="text-center text-foreground/50">
-        Fully Diluted supply on Solana
+        Supply on Solana. Circulating supply may be different.
       </p>
-      <ChartContainer
-        config={chartConfig}
-        className="mx-auto aspect-square max-h-[600px]"
-      >
-        <PieChart>
-          <ChartTooltip
-            cursor={false}
-            content={<ChartTooltipContent hideLabel />}
-          />
-          <Pie
-            data={chartData?.prices}
-            dataKey="marketCap"
-            nameKey="symbol"
-            innerRadius={150}
-            strokeWidth={5}
-            paddingAngle={2}
-          >
-            {Object.keys(chartColors).map((color) => (
-              <Cell
-                key={`cell-${color}`}
-                fill={chartColors[color as keyof typeof chartConfig]}
-              />
-            ))}
-            <Label
-              content={({ viewBox }) => {
-                if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                  return (
-                    <text
-                      x={viewBox.cx}
-                      y={viewBox.cy}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                    >
-                      <tspan
+      {isLoading && <div>Loading...</div>}
+      {!!chartData && (
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[600px]"
+          data-testid="market-cap-chart"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData.prices}
+              dataKey="marketCap"
+              nameKey="symbol"
+              innerRadius={150}
+              strokeWidth={5}
+              paddingAngle={2}
+            >
+              {Object.keys(chartColors).map((color) => (
+                <Cell
+                  key={`cell-${color}`}
+                  fill={chartColors[color as keyof typeof chartConfig]}
+                />
+              ))}
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                    return (
+                      <text
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        className="fill-foreground text-3xl font-bold"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
                       >
-                        {`$${chartData?.totalMarketCap.toLocaleString('en-US')}`}
-                      </tspan>
-                      <tspan
-                        x={viewBox.cx}
-                        y={(viewBox.cy || 0) + 24}
-                        className="fill-muted-foreground"
-                      >
-                        Total Market Cap
-                      </tspan>
-                    </text>
-                  );
-                }
-              }}
-            />
-          </Pie>
-        </PieChart>
-      </ChartContainer>
+                        <tspan
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                          {`$${chartData?.totalMarketCap.toLocaleString('en-US')}`}
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          Total Market Cap
+                        </tspan>
+                      </text>
+                    );
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      )}
     </section>
   );
 }

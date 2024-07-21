@@ -29,8 +29,6 @@ export default function Wallets() {
       ),
   });
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <section className="flex flex-col gap-6">
       <h1 className="text-center text-3xl font-bold">Wallets</h1>
@@ -38,24 +36,31 @@ export default function Wallets() {
         Some random wallets from the rich list... that I guess don't always have
         funds.
       </p>
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-        <BarChart data={chartData}>
-          <CartesianGrid vertical={false} />
-          <XAxis
-            dataKey="address"
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-            tickFormatter={(address: string) =>
-              `${address.slice(0, 4)}...${address.slice(-4)}`
-            }
-          />
-          <YAxis tickFormatter={(value) => value.toLocaleString()} />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          <ChartLegend content={<ChartLegendContent />} />
-          <Bar dataKey="balance" fill="var(--color-balance)" />
-        </BarChart>
-      </ChartContainer>
+      {isLoading && <div>Loading...</div>}
+      {!!chartData && (
+        <ChartContainer
+          config={chartConfig}
+          className="min-h-[200px] w-full"
+          data-testid="wallets-chart"
+        >
+          <BarChart data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="address"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(address: string) =>
+                `${address.slice(0, 4)}...${address.slice(-4)}`
+              }
+            />
+            <YAxis tickFormatter={(value) => value.toLocaleString()} />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <ChartLegend content={<ChartLegendContent />} />
+            <Bar dataKey="balance" fill="var(--color-balance)" />
+          </BarChart>
+        </ChartContainer>
+      )}
     </section>
   );
 }
