@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  # the web container has an error on docker-compose up:
+  # Error: Cannot find module '/app/pnpm'
+  # web:
+  #   container_name: web
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/web/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
+    ports:
+      - 3001:3001
