@@ -6,6 +6,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL } from '../paths';
 
 interface MarketCapDto {
   totalMarketCap: number;
@@ -53,7 +54,7 @@ export default function MarketCap() {
   const { data: chartData, isLoading } = useQuery({
     queryKey: ['market-cap'],
     queryFn: () =>
-      fetch('http://localhost:3000/market-cap').then(
+      fetch(`${API_URL}/market-cap`).then(
         (res) => res.json() as Promise<MarketCapDto>,
       ),
   });

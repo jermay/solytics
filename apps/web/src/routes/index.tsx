@@ -6,6 +6,7 @@ import {
   ChartTooltipContent,
 } from '../components/ui/chart';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL } from './paths';
 
 interface TPSDto {
   slot: number;
@@ -23,7 +24,7 @@ export default function Index() {
   const { data: chartData, isLoading } = useQuery({
     queryKey: ['tps'],
     queryFn: () =>
-      fetch('http://localhost:3000/tps').then(async (res) => {
+      fetch(`${API_URL}/tps`).then(async (res) => {
         try {
           // response is not received here in the test environment :/
           // console.log({ res });

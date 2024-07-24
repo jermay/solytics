@@ -24,10 +24,24 @@ Tech stack:
 
 - [x] Frontend tests
 - [ ] Backend tests
-- [ ] Dockerize backend
+- [x] Dockerize backend
+- [ ] Dockerize frontend (WIP)
 - [ ] Redis instead of in NestJs default in memory cache
 
-## Starting the project
+## Starting the project with Docker
+
+Make sure you have Docker Desktop and `pnpm` installed.
+
+```bash
+pnpm install
+pnpm docker:build
+pnpm docker:up
+pnpm --filter=web dev
+```
+
+There is currently a bug with the web docker container, but the api works fine. The web service is currently commented out in the `docker-compose.yml` file.
+
+## Starting the project without docker
 
 ```bash
 pnpm install

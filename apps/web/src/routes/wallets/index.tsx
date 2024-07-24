@@ -7,6 +7,7 @@ import {
   ChartLegendContent,
 } from '@/components/ui/chart';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL } from '../paths';
 
 interface WalletDto {
   address: string;
@@ -24,7 +25,7 @@ export default function Wallets() {
   const { data: chartData, isLoading } = useQuery({
     queryKey: ['market-cap'],
     queryFn: () =>
-      fetch('http://localhost:3000/wallets').then(
+      fetch(`${API_URL}/wallets`).then(
         (res) => res.json() as Promise<WalletDto[]>,
       ),
   });

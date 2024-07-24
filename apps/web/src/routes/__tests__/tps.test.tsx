@@ -3,10 +3,11 @@ import '@testing-library/jest-dom';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import Index from '..';
+import { API_URL } from '../paths';
 
 // mock API responses as empty arrays
 const server = setupServer(
-  http.get('http://localhost:3000/tps', () => {
+  http.get(`${API_URL}/tps`, () => {
     console.log('GET /tps');
     return HttpResponse.json([
       { slot: 1, tps: 3000 },

@@ -3,7 +3,7 @@ import Index from '.';
 import ErrorPage from '../components/ErrorPage';
 import MarketCap from './market-cap';
 import Wallets from './wallets';
-import Root from './Root';
+import Root from './root';
 
 export const routes = [
   {
@@ -17,3 +17,5 @@ export const routes = [
     ],
   },
 ] satisfies RouteObject[];
+
+export const API_URL = 'HTTP://localhost:3001';
