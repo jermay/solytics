@@ -9,7 +9,9 @@ Some basic analytics for Solana. Pulls in live data from on chain.
 Tech stack:
 
 - [Turborepo](https://turbo.build/repo/docs): monorepo manager, makes it easier to manage multiple projects and code sharing
+  - Bootstrapped using with-nestjs and pieces copied from with-vite and with-docker templates. See [create-turbo](https://turbo.build/repo/docs/reference/create-turbo)
   - It shows a separate UI package, but it was taken out for now as it wasn't clear how to manually set up shadcn/ui with it
+- [Docker](https://www.docker.com/): containerization
 - [NestJS](https://docs.nestjs.com/): opinionated Node.js Typescript framework that encourages good practices
 - [Solana Web3.js](https://solana.com/docs/clients/javascript): Solana blockchain javascript RPC client
 - [React](https://reactjs.org/): UI framework
@@ -18,6 +20,7 @@ Tech stack:
 - [Shadcn/ui](https://github.com/Shadcn/ui): clean, based on headless primitives from Radix, imports the code- it's not a component library so have full control
 - [Tanstack React Query](https://tanstack.com/query/latest): data fetching and caching in the browser, query state management
 - [React Testing Library](https://testing-library.com/docs/): frontend testing utilities
+- [Mock Service Worker](https://mswjs.io/): mock API responses in the browser
 - [Jest](https://jestjs.io/): JavaScript testing framework
 
 ### TODO
@@ -25,7 +28,7 @@ Tech stack:
 - [x] Frontend tests
 - [ ] Backend tests
 - [x] Dockerize backend
-- [ ] Dockerize frontend (WIP)
+- [x] Dockerize frontend
 - [ ] Redis instead of in NestJs default in memory cache
 
 ## Starting the project with Docker
@@ -34,12 +37,13 @@ Make sure you have Docker Desktop and `pnpm` installed.
 
 ```bash
 pnpm install
+pnpm build
 pnpm docker:build
 pnpm docker:up
-pnpm --filter=web dev
 ```
 
-There is currently a bug with the web docker container, but the api works fine. The web service is currently commented out in the `docker-compose.yml` file.
+- Open http://localhost:3000 in your browser
+- API is running on http://localhost:3001
 
 ## Starting the project without docker
 
