@@ -48,7 +48,6 @@ const chartColors = {} as Record<keyof typeof chartConfig, string>;
 for (const key of Object.keys(chartConfig)) {
   chartColors[key as keyof typeof chartConfig] = `var(--color-${key})`;
 }
-console.log(chartColors);
 
 export default function MarketCap() {
   const { data: chartData, isLoading } = useQuery({
@@ -68,7 +67,7 @@ export default function MarketCap() {
         Supply on Solana. Circulating supply may be different.
       </p>
       {isLoading && <div>Loading...</div>}
-      {!!chartData && (
+      {chartData ? (
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[600px]"
@@ -125,6 +124,8 @@ export default function MarketCap() {
             </Pie>
           </PieChart>
         </ChartContainer>
+      ) : (
+        <div>No data</div>
       )}
     </section>
   );

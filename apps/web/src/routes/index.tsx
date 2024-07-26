@@ -23,26 +23,23 @@ const chartConfig = {
 export default function Index() {
   const { data: chartData, isLoading } = useQuery({
     queryKey: ['tps'],
-    queryFn: () =>
-      fetch(`${API_URL}/tps`).then(async (res) => {
-        try {
-          // response is not received here in the test environment :/
-          // console.log({ res });
-          const result = (await res.json()) as TPSDto[];
-          // console.log({ result });
-          return result;
-        } catch (e) {
-          console.error(e);
-          return [];
-        }
-      }),
+    queryFn: async () => {
+      try {
+        const response = await fetch(`${API_URL}/tps`);
+        const result = (await response.json()) as TPSDto[];
+        return result;
+      } catch (e) {
+        console.error(e);
+        return [] as TPSDto[];
+      }
+    },
   });
 
   return (
     <section className="flex flex-col gap-6">
       <h2 className="text-center text-3xl">Recent Solana TPS</h2>
       {isLoading && <div>Loading...</div>}
-      {!!chartData && (
+      {chartData ? (
         <ChartContainer
           data-testid="tps-chart"
           config={chartConfig}
@@ -88,6 +85,8 @@ export default function Index() {
             />
           </LineChart>
         </ChartContainer>
+      ) : (
+        <div>No data</div>
       )}
     </section>
   );
