@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
 
 // shim for bigint
 (BigInt.prototype as any).toJSON = function () {
@@ -11,6 +12,11 @@ async function bootstrap() {
 
   app.enableCors();
 
-  await app.listen(3000);
+  const port = 3001;
+  const logger = new Logger('bootstrap');
+
+  await app.listen(port, () => {
+    logger.log(`Listening on port ${port}`);
+  });
 }
 bootstrap();
